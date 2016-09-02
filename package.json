@@ -1,5 +1,5 @@
 {
-    "name": "express-mongoose-generator",
+    "name": "express-mongoose-generator-es6",
     "version": "2.1.0",
     "description": "It’s a mongoose model, REST controller and Express router code generator for Express.js 4 application",
     "author": "Damien Perrier <damienperrier33@gmail.com>",
@@ -19,7 +19,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/DamienP33/express-mongoose-generator"
+        "url": "https://github.com/johanpedroo/express-mongoose-generator"
     },
     "main": "bin/mongoose-gen",
     "scripts": {
@@ -28,7 +28,7 @@
         "cs": "jscs ./**/*.js ./bin/mongoose-gen"
     },
     "engines": {
-        "node": ">= 0.10.0"
+        "node": ">= 6.0.0"
     },
     "license": "MIT",
     "preferGlobal": true,

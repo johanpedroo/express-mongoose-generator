@@ -1,4 +1,4 @@
-var {modelName} = require('../models/{modelName}.js');
+const {modelName} = require('../models/{modelName}.js');
 
 /**
  * {controllerName}.js
@@ -10,8 +10,8 @@ module.exports = {
     /**
      * {controllerName}.list()
      */
-    list: function (req, res) {
-        {modelName}.find(function (err, {pluralName}) {
+    list: (req, res) => {
+        {modelName}.find((err, {pluralName}) => {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting {name}.',
@@ -25,9 +25,9 @@ module.exports = {
     /**
      * {controllerName}.show()
      */
-    show: function (req, res) {
-        var id = req.params.id;
-        {modelName}.findOne({_id: id}, function (err, {name}) {
+    show: (req, res) => {
+        let id = req.params.id;
+        {modelName}.findOne({_id: id}, (err, {name}) => {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting {name}.',
@@ -46,11 +46,11 @@ module.exports = {
     /**
      * {controllerName}.create()
      */
-    create: function (req, res) {
-        var {name} = new {modelName}({{createFields}
+    create: (req, res) => {
+        let {name} = new {modelName}({{createFields}
         });
 
-        {name}.save(function (err, {name}) {
+        {name}.save((err, {name}) => {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when creating {name}',
@@ -64,9 +64,9 @@ module.exports = {
     /**
      * {controllerName}.update()
      */
-    update: function (req, res) {
-        var id = req.params.id;
-        {modelName}.findOne({_id: id}, function (err, {name}) {
+    update: (req, res) => {
+        let id = req.params.id;
+        {modelName}.findOne({_id: id}, (err, {name}) => {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting {name}',
@@ -80,7 +80,7 @@ module.exports = {
             }
 
             {updateFields}
-            {name}.save(function (err, {name}) {
+            {name}.save( (err, {name}) => {
                 if (err) {
                     return res.status(500).json({
                         message: 'Error when updating {name}.',
@@ -96,9 +96,9 @@ module.exports = {
     /**
      * {controllerName}.remove()
      */
-    remove: function (req, res) {
-        var id = req.params.id;
-        {modelName}.findByIdAndRemove(id, function (err, {name}) {
+    remove: (req, res) => {
+        let id = req.params.id;
+        {modelName}.findByIdAndRemove(id, (err, {name}) => {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when deleting the {name}.',

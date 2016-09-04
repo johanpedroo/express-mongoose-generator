@@ -11,7 +11,7 @@ module.exports = {
      * {controllerName}.list()
      */
     list: (req, res) => {
-        {modelName}.find((err, {pluralName}) => {
+        {modelName}.find(req.query.where || {},req.query.fields || {}, req.query.sort || {},(err, {pluralName}) => {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting {name}.',

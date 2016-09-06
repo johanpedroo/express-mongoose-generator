@@ -1,11 +1,8 @@
 {
     "name": "express-mongoose-generator-es6",
-    "version": "2.1.0",
+    "version": "3.0.0",
     "description": "It’s a mongoose model, REST controller and Express router code generator for Express.js 4 application",
-    "author": "Damien Perrier <damienperrier33@gmail.com>",
-    "contributors": [
-        "romuloctba"
-    ],
+    "author": "Johan Pedro Inês <johanpedroo@gmail.com>",
     "keywords": [
         "mongodb",
         "mongoose",

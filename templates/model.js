@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 let Schema   = mongoose.Schema;
 
-let fields = {fields}
+const fields = {fields}
 
 let {schemaName} = new Schema(fields);
 

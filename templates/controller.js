@@ -1,4 +1,4 @@
-const {modelName} = require('../models/{modelName}.js')
+const {upperName} = require('../models/{modelName}.js')
 
 /**
  * {controllerName}.js
@@ -11,7 +11,7 @@ module.exports = {
    * {controllerName}.list()
    */
   list: (req, res) => {
-    {modelName}.find(req.query.where, req.query.fields, req.query.sort, (err, {pluralName}) => {
+    {upperName}.find(req.query.where, req.query.fields, req.query.sort, (err, {pluralName}) => {
       if (err) {
         return res.status(500).json({
           message: 'Error when getting {name}.',
@@ -27,7 +27,7 @@ module.exports = {
    */
   show: (req, res) => {
     let id = req.params.id
-    {modelName}.findOne({_id: id}, (err, {name}) => {
+    {upperName}.findOne({_id: id}, (err, {name}) => {
       if (err) {
         return res.status(500).json({
           message: 'Error when getting {name}.',
@@ -47,7 +47,7 @@ module.exports = {
    * {controllerName}.create()
    */
   create: (req, res) => {
-    let {name} = new {modelName}(req.body) // {createFields}
+    let {name} = new {upperName}(req.body)
 
     {name}.save((err, {name}) => {
       if (err) {
@@ -65,7 +65,7 @@ module.exports = {
    */
   update: (req, res) => {
     let id = req.params.id
-    {modelName}.findOne({_id: id}, (err, {name}) => {
+    {upperName}.findOne({_id: id}, (err, {name}) => {
       if (err) {
         return res.status(500).json({
           message: 'Error when getting {name}',
@@ -78,7 +78,9 @@ module.exports = {
         })
       }
 
-      {updateFields}
+      for (let attr in {name}) {
+        {name}[attr] = req.body[attr] || {name}[attr]
+      }
       {name}.save((err, {name}) => {
         if (err) {
           return res.status(500).json({
@@ -97,7 +99,7 @@ module.exports = {
    */
   remove: (req, res) => {
     let id = req.params.id
-    {modelName}.findByIdAndRemove(id, (err, {name}) => {
+    {upperName}.findByIdAndRemove(id, (err, {name}) => {
       if (err) {
         return res.status(500).json({
           message: 'Error when deleting the {name}.',

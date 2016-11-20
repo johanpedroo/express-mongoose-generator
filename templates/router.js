@@ -8,23 +8,23 @@ const {controllerName} = require('../controllers/{controllerName}.js')
 router.use((req, res, next) => {
   let query = {}
 
-  if (req.query.where)
+  if (req.query.where) {
     query.where = JSON.parse(req.query.where)
-
-  if (req.query.fields)
+  }
+  if (req.query.fields) {
     query.fields = JSON.parse(req.query.fields)
-
-  if (req.query.sort)
+  }
+  if (req.query.sort) {
     query.sort = {sort: JSON.parse(req.query.sort)}
-  else
+  } else {
     query.sort = {}
-
-  if (req.query.limit)
+  }
+  if (req.query.limit) {
     query.sort.limit = parseInt(req.query.limit, 10)
-
-  if (req.query.skip)
+  }
+  if (req.query.skip) {
     query.sort.skip = parseInt(req.query.skip, 10)
-
+  }
   req.query = query
 
   next()

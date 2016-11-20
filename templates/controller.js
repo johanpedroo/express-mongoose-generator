@@ -81,6 +81,7 @@ module.exports = {
       for (let attr in {name}) {
         {name}[attr] = req.body[attr] || {name}[attr]
       }
+      
       {name}.save((err, {name}) => {
         if (err) {
           return res.status(500).json({

@@ -1,5 +1,5 @@
 const express = require('express')
-const acl = require('../middleware').acl
+const acl = require('../middlewares').acl
 const router = express.Router()
 const {controllerName} = require('../controllers/{controllerName}.js')
 

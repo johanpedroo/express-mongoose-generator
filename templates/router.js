@@ -1,4 +1,5 @@
 const express = require('express')
+const acl = require('../middleware').acl
 const router = express.Router()
 const {controllerName} = require('../controllers/{controllerName}.js')
 
@@ -33,35 +34,35 @@ router.use((req, res, next) => {
 /*
  * GET
  */
-router.get('/', (req, res) => {
+router.get('/', acl.checkPermissions('{permissionsName}:list'), (req, res) => {
   {controllerName}.list(req, res)
 })
 
 /*
  * GET
  */
-router.get('/:id', (req, res) => {
+router.get('/:id', acl.checkPermissions('{permissionsName}:item'), (req, res) => {
   {controllerName}.show(req, res)
 })
 
 /*
  * POST
  */
-router.post('/', (req, res) => {
+router.post('/', acl.checkPermissions('{permissionsName}:create'), (req, res) => {
   {controllerName}.create(req, res)
 })
 
 /*
  * PUT
  */
-router.put('/:id', (req, res) => {
+router.put('/:id', acl.checkPermissions('{permissionsName}:update'), (req, res) => {
   {controllerName}.update(req, res)
 })
 
 /*
  * DELETE
  */
-router.delete('/:id', (req, res) => {
+router.delete('/:id', acl.checkPermissions('{permissionsName}:delete'), (req, res) => {
   {controllerName}.remove(req, res)
 })
 

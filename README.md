@@ -5,7 +5,7 @@ It’s a mongoose model, REST controller and Express router code generator for E
 
 ## Installation
 ```bash
-$ npm install -g express-mongoose-generator
+$ npm install -g express-mongoose-generator-es6
 ```
 
 ## Usage

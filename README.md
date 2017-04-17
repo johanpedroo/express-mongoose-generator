@@ -57,10 +57,10 @@ Generate Rest (yes/no) ? [yes] :
 ### Model
 models/carModel.js :
 ```javascript
-var mongoose = require('mongoose');
-var Schema   = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema   = mongoose.Schema;
 
-var carSchema = new Schema({
+const carSchema = new Schema({
 	"color" : String,
 	"door" : Number,
     "owner" : {
@@ -75,42 +75,42 @@ module.exports = mongoose.model('car', carSchema);
 ### Router
 routes/cars.js :
 ```javascript
-var express = require('express');
-var router = express.Router();
-var carController = require('../controllers/carController.js');
+const express = require('express');
+const router = express.Router();
+const carController = require('../controllers/carController.js');
 
 /*
  * GET
  */
-router.get('/', function(req, res) {
+router.get('/', (req, res) => {
     carController.list(req, res);
 });
 
 /*
  * GET
  */
-router.get('/:id', function(req, res) {
+router.get('/:id', (req, res) => {
     carController.show(req, res);
 });
 
 /*
  * POST
  */
-router.post('/', function(req, res) {
+router.post('/', (req, res) => {
     carController.create(req, res);
 });
 
 /*
  * PUT
  */
-router.put('/:id', function(req, res) {
+router.put('/:id', (req, res) => {
     carController.update(req, res);
 });
 
 /*
  * DELETE
  */
-router.delete('/:id', function(req, res) {
+router.delete('/:id', (req, res) => {
     carController.remove(req, res);
 });
 
@@ -120,7 +120,7 @@ module.exports = router;
 ### Controller
 controllers/carController.js :
 ```javascript
-var carModel = require('../models/carModel.js');
+const carModel = require('../models/carModel.js');
 
 /**
  * carController.js
@@ -132,8 +132,8 @@ module.exports = {
     /**
      * carController.list()
      */
-    list: function(req, res) {
-        carModel.find(function(err, cars){
+    list: (req, res) => {
+        carModel.find((err, cars) => {
             if(err) {
                 return res.status(500).json({
                     message: 'Error getting car.'
@@ -146,9 +146,9 @@ module.exports = {
     /**
      * carController.show()
      */
-    show: function(req, res) {
-        var id = req.params.id;
-        carModel.findOne({_id: id}, function(err, car){
+    show: (req, res) => {
+        let id = req.params.id;
+        carModel.findOne({_id: id}, (err, car) => {
             if(err) {
                 return res.status(500).json({
                     message: 'Error getting car.'
@@ -166,13 +166,13 @@ module.exports = {
     /**
      * carController.create()
      */
-    create: function(req, res) {
-        var car = new carModel({
+    create: (req, res) => {
+        let car = new carModel({
 			color : req.body.color,
 			door : req.body.door
         });
 
-        car.save(function(err, car){
+        car.save((err, car) => {
             if(err) {
                 return res.status(500).json({
                     message: 'Error saving car',
@@ -189,9 +189,9 @@ module.exports = {
     /**
      * carController.update()
      */
-    update: function(req, res) {
-        var id = req.params.id;
-        carModel.findOne({_id: id}, function(err, car){
+    update: (req, res) => {
+        let id = req.params.id;
+        carModel.findOne({_id: id}, (err, car) => {
             if(err) {
                 return res.status(500).json({
                     message: 'Error saving car',
@@ -207,7 +207,7 @@ module.exports = {
             car.color =  req.body.color ? req.body.color : car.color;
 			car.door =  req.body.door ? req.body.door : car.door;
 			
-            car.save(function(err, car){
+            car.save((err, car) => {
                 if(err) {
                     return res.status(500).json({
                         message: 'Error getting car.'
@@ -226,9 +226,9 @@ module.exports = {
     /**
      * carController.remove()
      */
-    remove: function(req, res) {
-        var id = req.params.id;
-        carModel.findByIdAndRemove(id, function(err, car){
+    remove: (req, res) => {
+        let id = req.params.id;
+        carModel.findByIdAndRemove(id, (err, car) => {
             if(err) {
                 return res.status(500).json({
                     message: 'Error getting car.'
@@ -243,8 +243,8 @@ module.exports = {
 You then only have to add router in app.js file and MongoDB connection whit Mongoose.
 app.js :
 ```javascript
-var routes = require('./routes/index');
-var cars = require('./routes/cars');
+const routes = require('./routes/index');
+const cars = require('./routes/cars');
  ...
 
 app.use('/', routes);

@@ -1,4 +1,4 @@
-import {upperName} from '../models/{modelName}.js';
+import {upperName} from '../models/{name}.js';
 
 /**
  * {controllerName}.js
@@ -131,3 +131,5 @@ class {controllerName} {
     }
   }
 }
+
+export default {controllerName};

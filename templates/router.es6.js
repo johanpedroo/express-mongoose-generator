@@ -1,6 +1,8 @@
 import { Router } from 'express';
-import { acl } from '../middlewares';
 import {controllerName} from '../controllers/{controllerName}.js';
+
+const router = new Router();
+const controller = new {controllerName}();
 
 /*
  * MIDDLEWARE
@@ -33,36 +35,36 @@ router.use((req, res, next) => {
 /*
  * GET
  */
-router.get('/', acl.checkPermissions('{permissionsName}:list'), (req, res) => {
-  {controllerName}.list(req, res);
+router.get('/', (req, res) => {
+  controller.list(req, res);
 });
 
 /*
  * GET
  */
-router.get('/:id', acl.checkPermissions('{permissionsName}:item'), (req, res) => {
-  {controllerName}.show(req, res);
+router.get('/:id', (req, res) => {
+  controller.show(req, res);
 });
 
 /*
  * POST
  */
-router.post('/', acl.checkPermissions('{permissionsName}:create'), (req, res) => {
-  {controllerName}.create(req, res);
+router.post('/', (req, res) => {
+  controller.create(req, res);
 });
 
 /*
  * PUT
  */
-router.put('/:id', acl.checkPermissions('{permissionsName}:update'), (req, res) => {
-  {controllerName}.update(req, res);
+router.put('/:id', (req, res) => {
+  controller.update(req, res);
 });
 
 /*
  * DELETE
  */
-router.delete('/:id', acl.checkPermissions('{permissionsName}:delete'), (req, res) => {
-  {controllerName}.remove(req, res);
+router.delete('/:id', (req, res) => {
+  controller.remove(req, res);
 });
 
 export default router;

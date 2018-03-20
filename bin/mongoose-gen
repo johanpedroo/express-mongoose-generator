@@ -26,14 +26,17 @@ program
     .option('-m, --model <modelName>', 'model name')
     .option('-f, --fields <fields>', 'model fields (name1:type1,name2:type2)')
     .option('-r, --rest', 'enable generation REST')
+    .option('--es6', 'Use ES6/ES7 (Modern) javascript')
     .parse(process.argv);
 
 // Main program
 (function (path) {
+    var es6 = !!(program.es6);
+
     if (program.model || program.fields) {
-        runNonInteractiveMode(path);
+        runNonInteractiveMode(path, es6);
     } else {
-        runInteractiveMode(path);
+        runInteractiveMode(path, es6);
     }
 })('.');
 
@@ -41,7 +44,7 @@ program
  * Get parameters in interactive mode
  * @param {string} path destination path
  */
-function runInteractiveMode (path) {
+function runInteractiveMode (path, es6) {
     async.series({
             name: function (cb) {
                 askQuestion('Model Name : ', isModelNameParamValid, function (name) {
@@ -118,15 +121,15 @@ function runInteractiveMode (path) {
 
             async.parallel([
                     function (cb) {
-                        generators.generateModel(path, results.name, results.fields, cb);
+                        generators.generateModel(path, results.name, results.fields, cb, es6);
                     },
                     function (cb) {
                         if (results.rest !== 'yes') { return cb(); }
-                        generators.generateRouter(path, results.name, cb);
+                        generators.generateRouter(path, results.name, cb, es6);
                     }            ,
                     function (cb) {
                         if (results.rest !== 'yes') { return cb(); }
-                        generators.generateController(path, results.name, results.fields, cb);
+                        generators.generateController(path, results.name, results.fields, cb, es6);
                     }
                 ],
                 function (err, results) {
@@ -141,7 +144,7 @@ function runInteractiveMode (path) {
  * Get parameters in non-interactive mode
  * @param {string} path destination path
  */
-function runNonInteractiveMode(path) {
+function runNonInteractiveMode(path, es6) {
     if (!isModelNameParamValid(program.model) || !isFieldsParamValid(program.fields)) {
         return closeProgram();
     }
@@ -153,15 +156,15 @@ function runNonInteractiveMode(path) {
 
     async.parallel([
             function (cb) {
-                generators.generateModel(path, modelName, modelFields, cb);
+                generators.generateModel(path, modelName, modelFields, cb, es6);
             },
             function (cb) {
                 if (!program.rest) { return cb(); }
-                generators.generateRouter(path, modelName, cb);
+                generators.generateRouter(path, modelName, cb, es6);
             }            ,
             function (cb) {
                 if (!program.rest) { return cb(); }
-                generators.generateController(path, modelName, modelFields, cb);
+                generators.generateController(path, modelName, modelFields, cb, es6);
             }
         ],
         function (err, results) {

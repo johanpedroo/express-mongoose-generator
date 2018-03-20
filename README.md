@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/DamienP33/express-mongoose-generator.svg?branch=master)](https://travis-ci.org/DamienP33/express-mongoose-generator)
 # express-mongoose-generator
 
-It’s a mongoose model, REST controller and Express router code generator for Express.js 4 application.
+It’s a mongoose model, REST controller and Express router code generator for Express.js 4 application. It supports ES6/ES7.
 
 ## Installation
 ```bash
@@ -23,6 +23,7 @@ $ mongoose-gen -m car -f carDoor:number,color -r
   - `-m, --model <modelName>` - the model name.
   - `-f, --fields  <fields>` - the fields (name1:type,name2:type).
   - `-r, --rest` - enable generation REST.
+  - `--es6` - Uses ES6/ES7 async/await
 
 ##### Available types
   - string
